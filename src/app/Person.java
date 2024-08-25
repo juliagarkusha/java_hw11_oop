@@ -11,16 +11,13 @@ public class Person {
         this.profession = profession;
     }
 
-    public void setProfession (String profession) {
+    public Person setProfession (String profession) {
         this.profession = profession;
+        return this;
     }
 
-    public void getPersonInfo () {
-        String info = String.format(
-                "Ім'я: %s, Вік: %d, Професія: %s",
-                this.name, this.age, this.profession
-        );
-
-        System.out.println(info);
+    @Override
+    public String toString() {
+        return String.format("Ім'я: %s, Вік: %d, Професія: %s", name, age, profession);
     }
 }

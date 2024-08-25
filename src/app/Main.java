@@ -1,16 +1,47 @@
 package app;
 
+import java.lang.reflect.Array;
+
 public class Main {
+    static String title;
+
     public static void main(String[] args) {
-        Person bob = new Person("bob", 30, "devOps");
-        Person alice = new Person("alice", 33, "react dev");
-        Person kiri = new Person("kiri", 28, "qa");
 
-        bob.getPersonInfo();
-        alice.getPersonInfo();
-        kiri.getPersonInfo();
+        Person[] persons = new DataRepository().getPersonsData();
 
-        bob.setProfession("java dev");
-        bob.getPersonInfo();
+        title = "Initial data: ";
+        printPersonList(title, persons);
+
+        title = "Person: ";
+        Person person = getPersonByIndex(persons, 1);
+        printPerson(title, person);
+
+        title = "Updated person: ";
+        Person personUpd = person.setProfession("java dev");
+        printPerson(title, personUpd);
+
+        title = "Updated data: ";
+        printPersonList(title, persons);
+    }
+
+    private static void printPerson (String title, Person person) {
+        System.out.println(title + ": " + person + "\n");
+    }
+
+    private static Person getPersonByIndex (Person[] persons, int index) {
+        return (Person) Array.get(persons, index);
+    }
+
+    private static void printPersonList (String title, Person[] persons) {
+        System.out.println(title);
+
+        int count = 0;
+
+        for (Person person: persons) {
+            count++;
+            System.out.println(count + ") " + person.toString());
+        }
+
+        System.out.println();
     }
 }
